@@ -13,9 +13,14 @@ public class Main {
 		ArrayList<taxPlayer> listTax = new ArrayList<>();
 		double totalTax = 0;
 		
-		System.out.println("Enter the number of tax payers: ");
-		number = sc.nextInt();
-		sc.nextLine();
+		try {
+			number = numberOfTax(sc);
+			sc.nextLine();
+		}
+		catch (Exception e) {
+			System.out.println("Erro de input!");
+			number = 0;
+		}
 		for(int i = 1; i <= number; i++) {
 			System.out.print("Individual or company (i/c)? ");
 			type = sc.next().charAt(0);
@@ -44,6 +49,10 @@ public class Main {
 		
 		
 		sc.close();
+	}
+	public static int numberOfTax(Scanner sc) {
+		System.out.println("Enter the number of tax payers: ");
+		return sc.nextInt();
 	}
 
 }

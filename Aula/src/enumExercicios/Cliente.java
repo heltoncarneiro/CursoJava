@@ -7,8 +7,7 @@ public class Cliente {
 	private String name;
 	private String email;
 	private Date dateOfBirthday;
-	
-	SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
+	private static SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
 	
 	public String getName() {
 		return name;
