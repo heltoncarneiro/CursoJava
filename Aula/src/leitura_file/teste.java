@@ -1,8 +1,5 @@
 package leitura_file;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.File;
 import java.util.Scanner;
 
@@ -36,7 +33,8 @@ public class teste {
 		
 		
 		*/
-		
+
+		/*
 		String path = "C:\\Users\\helto\\OneDrive\\Documentos\\in.txt";
 		try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 			String lerfile = br.readLine();
@@ -48,6 +46,52 @@ public class teste {
 		catch (IOException e) {
 			System.out.println("Erro: "+ e.getMessage());
 		}
+		*/
+		
+		/*
+		String listaFrase [] = {"asdasdfasdfasd\n","adfssdfa\n","cxzvzxcvasdf\n"};
+		String path = "C:\\Users\\helto\\OneDrive\\Documentos\\input.txt";
+		// para ao inves de recriar o arquivo e acrescentar nesse aquivo BufferedWriter bw = new BufferedWriter(new FileWriter(path,true)
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
+			for(String i : listaFrase) {
+				bw.write(i);
+				//bw.newLine();
+			}
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+			// TODO: handle exception
+		}
+		*/
+		
+		/*
+		//C:\Users\helto\OneDrive\Documentos\workspace
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Qual a pasta deseja procurar:");
+		String stringPath = sc.nextLine();
+		
+		File path = new File(stringPath);
+		
+		File[] folders = path.listFiles(File::isDirectory);
+		System.out.println("FOLDERS:");
+		for (File folder : folders) {
+		System.out.println(folder);
+		}
+		sc.close();
+		*/
+		
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Qual a pasta deseja procurar:");
+		String stringPath = sc.nextLine();
+		
+		File path = new File(stringPath);
+		
+		
+		sc.close();
+		
 	}
 
 }
