@@ -1,0 +1,41 @@
+Crie
+sua própria implementação de Lista Duplamente Encadeada, com as
+seguintes características:
+
+
+*Uma classe No, cujos atributos e métodos devem ser definidos por você: ok
+
+*Uma classe ListaDupla com: ok
+(i)o atributo ref (referencia para o primeiro no da lista)ok
+(ii)e com os seguintes métodos:
+-ao menos um método construtor, cujos parâmetros devem ser livremente
+definidos por você ok
+
+-insere(int info) (inserção na lista de forma ordenada) ok
+
+-imprime(), que deve imprimir a lista do início para o fim e depois do fim para
+o início  ok
+
+-listaVazia(), que retorna verdadeiro ou falso ok
+
+-remove(int info), que remove os elemento encontrados na lista contendo o
+parametro ‘info’ passado. Apenas a parte necessária da lista deve ser processada. ok
+
+*Crie um método main para testar sua lista. Você
+deve testar as seguintes situações:
+
+a)remoção do inicio (1,0) ok
+b)remoção do final (1,0) ok
+c)remoção do meio (1,0) ok
+d)remoção de elementos que possuem cópias (2,0) ok
+e)remoção de elementos inexistentes (1,0) ok
+g)imprimir lista vazia (1,0) ok
+h)esvaziar lista e voltar a preenchê-la (2,0) ok
+O processamento apenas da parte necessária da lista vale 1,0 ponto.
+
+O seu método main deve ser o mais claro possível. Deve mostrar a
+lista antes e depois de cada operação, estar comentada e deve
+explicar cada impressão realizada (ex: lista após remoção de
+elemento duplicado: 1 2 3 …). Os valores testados nas inserções e
+remoções devem estar escritos literalmente no código, ao invés de
+serem lidos do teclado.
