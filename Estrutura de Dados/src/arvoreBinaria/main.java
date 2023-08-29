@@ -5,9 +5,54 @@ public class main {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArvoreBinaria arvore = new ArvoreBinaria("A", new ArvoreBinaria("B", new ArvoreBinaria("C"), new ArvoreBinaria("D")), new ArvoreBinaria("E", null, new ArvoreBinaria("F")));
-		System.out.println(arvore.preOrder());
-		System.out.println(arvore.emOrder());
-		System.out.println(arvore.posOrder());
+		ArvoreBinaria arvore2 = new ArvoreBinaria("1",new ArvoreBinaria("2"),new ArvoreBinaria("3"));
+		ArvoreBinaria arvore3 = new ArvoreBinaria("I",new ArvoreBinaria("II", new ArvoreBinaria("III"),null), null);
+		/* 
+			arvore = 
+						  A
+					     / \
+					    /   \
+					   B     E
+ 					  / \	  \
+					 /   \	   \	
+					C     D     F
+			
+			
+			arvore 2 = 
+						  1
+					     / \
+					    /   \
+					   2     3
+			
+			
+			arvore 3 = 
+						  I
+					     / 
+					    /   
+					  II     
+ 					  / 	  
+					 /   	   	
+				   III         
+
+		*/
+		System.out.println("Arvore 1 pré-ordem: "+arvore.preOrder());
+		System.out.println("Arvore 1 em-ordem: "+arvore.emOrder());
+		System.out.println("Arvore 1 pós-ordem: "+arvore.posOrder());
+		System.out.println("\"A\" está na Arvore 1: "+arvore.pertence("A"));
+		System.out.println("\"H\" está na Arvore 1: "+arvore.pertence("H"));
+		System.out.println("Altura da arvore 1: "+arvore.altura());
+		System.out.println("\n");
+		System.out.println("Arvore 1 está cheia: "+arvore.cheia());
+		System.out.println("Arvore 2 está cheia: "+arvore2.cheia());
+		System.out.println("Arvore 3 está cheia: "+arvore3.cheia());
+		System.out.println();
+		System.out.println("Arvore 1 está completa: "+arvore.completa(arvore.altura()));
+		System.out.println("Arvore 2 está cheia: "+arvore2.completa(arvore2.altura()));
+		System.out.println("Arvore 3 está cheia: "+arvore3.completa(arvore3.altura()));
+		System.out.println();
+		System.out.println("Arvore 1 é degenerada: "+arvore.degenerada(arvore.altura()));
+		System.out.println("Arvore 2 é degenerada: "+arvore2.degenerada(arvore2.altura()));
+		System.out.println("Arvore 3 é degenerada: "+arvore3.degenerada(arvore3.altura()));
 	}
 
 }
