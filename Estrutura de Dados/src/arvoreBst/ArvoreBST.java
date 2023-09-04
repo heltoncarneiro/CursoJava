@@ -152,14 +152,47 @@ public class ArvoreBST {
 		if(vazia() == true) {
 			raiz = val;
 		}else {
-			ArvoreBST ref = new ArvoreBST();
-			while(true) {
-				if(val<raiz && esquerda == null) {
-					esquerda = new ArvoreBST(val);
-				}else if(val<raiz && esquerda != null) {
-					ref = esquerda;
-				}
+			if(val<raiz && esquerda == null) {
+				esquerda = new ArvoreBST(val);
+			}else if(val>=raiz && direita == null) {
+				direita = new ArvoreBST(val);
+			}else if(val<raiz) {
+				esquerda.inserir(val);
+			}else if(val>=raiz) {
+				direita.inserir(val);
 			}
+		}
+	}
+	public int buscarMin() {
+		if(esquerda == null) {
+			return raiz;
+		}else {
+			return esquerda.buscarMin();
+		}
+	}
+	public int buscarMax() {
+		if(direita == null) {
+			return raiz;
+		}else{
+			return direita.buscarMax();
+		}
+	}
+	public boolean buscar(Integer val) {
+		if(raiz == val) {
+			return true;
+		}else if(val > raiz && direita != null) {
+			return direita.buscar(val);
+		}else if(val < raiz && esquerda != null) {
+			return esquerda.buscar(val);
+		}else {
+			return false;
+		}
+	}
+	public Integer Sucessor() {
+		if(direita == null) {
+			return null;
+		}else {
+			return direita.buscarMin();
 		}
 	}
 }
