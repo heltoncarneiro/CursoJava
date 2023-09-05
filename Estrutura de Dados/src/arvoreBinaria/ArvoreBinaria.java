@@ -135,6 +135,7 @@ public class ArvoreBinaria {
 			return false;
 		}
 	}
+	@SuppressWarnings("unused")
 	public boolean completa(int altura){
 		if(esquerda == null && direita == null) {
 			return (raiz != null);

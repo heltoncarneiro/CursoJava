@@ -122,6 +122,7 @@ public class ArvoreBST {
 			return false;
 		}
 	}
+	@SuppressWarnings("unused")
 	public boolean completa(int altura){
 		if(esquerda == null && direita == null) {
 			return (raiz != null);
@@ -188,11 +189,17 @@ public class ArvoreBST {
 			return false;
 		}
 	}
-	public Integer Sucessor() {
-		if(direita == null) {
-			return null;
+	public Integer Sucessor(Integer num) {
+		if(esquerda != null &&(esquerda.raiz > num || (esquerda.raiz>= num && esquerda.direita != null))) {
+			return esquerda.Sucessor(num);
+		}else if(direita != null &&(direita.raiz < num || (direita.raiz<= num && direita.direita != null))) {
+			return direita.Sucessor(num);
+		}else if(raiz > num) {
+			return raiz;
+		}else if(direita.raiz > num) {
+			return direita.Sucessor(num);
 		}else {
-			return direita.buscarMin();
+			return null;
 		}
 	}
 }
