@@ -7,6 +7,7 @@ public class main {
 		ArvoreBinaria arvore = new ArvoreBinaria("A", new ArvoreBinaria("B", new ArvoreBinaria("C"), new ArvoreBinaria("D")), new ArvoreBinaria("E", null, new ArvoreBinaria("F")));
 		ArvoreBinaria arvore2 = new ArvoreBinaria("1",new ArvoreBinaria("2"),new ArvoreBinaria("3"));
 		ArvoreBinaria arvore3 = new ArvoreBinaria("I",new ArvoreBinaria("II", new ArvoreBinaria("III"),null), null);
+		ArvoreBinaria arvore4 = new ArvoreBinaria();
 		/* 
 			arvore = 
 						  A4
@@ -50,9 +51,10 @@ public class main {
 		System.out.println("Arvore 2 est� cheia: "+arvore2.completa(arvore2.altura()));
 		System.out.println("Arvore 3 est� cheia: "+arvore3.completa(arvore3.altura()));
 		System.out.println();
-		System.out.println("Arvore 1 � degenerada: "+arvore.degenerada(arvore.altura()));
-		System.out.println("Arvore 2 � degenerada: "+arvore2.degenerada(arvore2.altura()));
-		System.out.println("Arvore 3 � degenerada: "+arvore3.degenerada(arvore3.altura()));
+		System.out.println("Arvore 1 � degenerada: "+arvore.degenerada());
+		System.out.println("Arvore 2 � degenerada: "+arvore2.degenerada());
+		System.out.println("Arvore 3 � degenerada: "+arvore3.degenerada());
+		System.out.println("Arvore 4 � degenerada: "+arvore4.degenerada());
 	}
 
 }

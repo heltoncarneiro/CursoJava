@@ -155,11 +155,15 @@ public class ArvoreBinaria {
 			return (raiz != null) && esquerda.completa(altura-1) && direita.completa(altura-1);
 		}
 	}
-	public boolean degenerada(int altura) {
-		if(completa(altura) == false) {
-			return true;
-		}else {
+	public boolean degenerada() {
+		if((esquerda != null && direita != null)|| vazia() == true) {
 			return false;
+		}else if(esquerda != null && direita == null) {
+			return esquerda.degenerada();
+		}else if(esquerda == null && direita != null) {
+			return direita.degenerada();
+		}else {
+			return true;
 		}
 	}
 }

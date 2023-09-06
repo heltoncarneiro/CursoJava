@@ -64,11 +64,11 @@ public class ArvoreBST {
 	}
 	public String posOrder() {
 		if(esquerda == null && direita == null){
-			return getRaiz().toString()+",";
+			return ","+ getRaiz().toString()+",";
 		}else if(esquerda == null && direita !=null) {
-			return ","+direita.posOrder()+getRaiz()+",";
+			return direita.posOrder()+getRaiz()+",";
 		}else if(esquerda != null && direita == null) {
-			return ","+esquerda.posOrder()+getRaiz()+",";
+			return esquerda.posOrder()+getRaiz()+",";
 		}else {
 			return	esquerda.posOrder()+direita.posOrder()+getRaiz();
 		}
@@ -142,11 +142,15 @@ public class ArvoreBST {
 			return (raiz != null) && esquerda.completa(altura-1) && direita.completa(altura-1);
 		}
 	}
-	public boolean degenerada(int altura) {
-		if(completa(altura) == false) {
-			return true;
-		}else {
+	public boolean degenerada() {
+		if((esquerda != null && direita != null)|| vazia() == true) {
 			return false;
+		}else if(esquerda != null && direita == null) {
+			return esquerda.degenerada();
+		}else if(esquerda == null && direita != null) {
+			return direita.degenerada();
+		}else {
+			return true;
 		}
 	}
 	public void inserir(Integer val) {
@@ -202,4 +206,51 @@ public class ArvoreBST {
 			return null;
 		}
 	}
+	
+	public ArvoreBST returnDireita(Integer num){
+		if(raiz == num) {
+			return direita;
+		}else if(num > raiz && direita != null) {
+			return direita.returnDireita(num);
+		}else if(num < raiz && esquerda != null) {
+			return esquerda.returnDireita(num);
+		}else {
+			return null;
+		}
+	}
+	public void remover(Integer val) {
+		if(direita.raiz == val) {
+			if(direita.direita == null && direita.esquerda == null) {
+				direita = null;
+			}else if(direita.direita != null && direita.esquerda == null){
+				direita = direita.direita;
+			}else if(direita.direita == null && direita.esquerda != null){
+				direita = direita.esquerda;
+			}else {
+				int sucessor = direita.Sucessor(val);
+				ArvoreBST direitaSucessor = direita.returnDireita(sucessor);
+				direita.raiz = sucessor;
+				direita.direita = direitaSucessor;
+			}
+		}if(esquerda.raiz == val) {
+			if(esquerda.direita == null && esquerda.esquerda == null) {
+				esquerda = null;
+			}else if(esquerda.direita != null && esquerda.esquerda == null){
+				esquerda = esquerda.direita;
+			}else if(esquerda.direita == null && esquerda.esquerda != null){
+				esquerda = esquerda.esquerda;
+			}else {
+				int sucessor = esquerda.Sucessor(val);
+				ArvoreBST direitaSucessor = esquerda.returnDireita(sucessor);
+				esquerda.raiz = sucessor;
+				esquerda.direita = direitaSucessor;
+			}
+		}else if(val > raiz && direita != null) {
+			direita.remover(val);
+		}else if(val < raiz && esquerda != null) {
+			esquerda.remover(val);
+		}
+	}
+	
+	
 }
