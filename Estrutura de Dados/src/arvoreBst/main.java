@@ -1,5 +1,4 @@
 package arvoreBst;
-
 public class main {
 
 	public static void main(String[] args) {
@@ -98,7 +97,42 @@ public class main {
 		*/
 		
 		
-		
+		ArvoreBST arvore = new ArvoreBST(15);
+		arvore.inserir(arvore.getTree(), 6);
+		arvore.inserir(arvore.getTree(), 1);
+		arvore.inserir(arvore.getTree(), 9);
+		arvore.inserir(arvore.getTree(), 7);
+		arvore.inserir(arvore.getTree(), 8);
+		arvore.inserir(arvore.getTree(), 14);
+		arvore.inserir(arvore.getTree(), 18);
+		arvore.inserir(arvore.getTree(), 16);
+		arvore.inserir(arvore.getTree(), 17);
+		arvore.inserir(arvore.getTree(), 22);
+		System.out.println(arvore.getTree().preOrder());
+		arvore.remover(arvore.getTree(), 1);
+		System.out.println(arvore.getTree().preOrder());
+		arvore.remover(arvore.getTree(), 14);
+		System.out.println(arvore.getTree().preOrder());
+		arvore.remover(arvore.getTree(), 18);
+		System.out.println(arvore.getTree().preOrder());
+		arvore.remover(arvore.getTree(), 22);
+		System.out.println(arvore.getTree().preOrder());
+		arvore.remover(arvore.getTree(), 6);
+		System.out.println(arvore.getTree().preOrder());
+		arvore.remover(arvore.getTree(), 8);
+		System.out.println(arvore.getTree().preOrder());
+		arvore.remover(arvore.getTree(), 7);
+		System.out.println(arvore.getTree().preOrder());
+		arvore.remover(arvore.getTree(), 16);
+		System.out.println(arvore.getTree().preOrder());
+		arvore.remover(arvore.getTree(), 15);
+		System.out.println(arvore.getTree().preOrder());
+		arvore.remover(arvore.getTree(), 17);
+		System.out.println(arvore.getTree().preOrder());
+		arvore.remover(arvore.getTree(), 9);
+		System.out.println(arvore.getTree().preOrder());
+		arvore.inserir(arvore.getTree(), 50);
+		System.out.println(arvore.getTree().preOrder());
 		
 	}
 

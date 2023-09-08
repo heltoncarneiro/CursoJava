@@ -1,254 +1,129 @@
 package arvoreBst;
 
 public class ArvoreBST {
-	private Integer raiz;
-	private ArvoreBST esquerda;
-	private ArvoreBST direita;
-	public Integer getRaiz() {
-		return raiz;
+	private Arvore tree;
+	
+	public Arvore getTree() {
+		return tree;
 	}
-	public void setRaiz(Integer raiz) {
-		this.raiz = raiz;
+	public void setTree(Arvore tree) {
+		this.tree = tree;
 	}
-	public ArvoreBST getEsquerda() {
-		return esquerda;
-	}
-	public void setEsquerda(ArvoreBST esquerda) {
-		this.esquerda = esquerda;
-	}
-	public ArvoreBST getDireita() {
-		return direita;
-	}
-	public void setDireita(ArvoreBST direita) {
-		this.direita = direita;
-	}
-	public ArvoreBST(Integer raiz) {
+	public ArvoreBST(Integer root) {
 		super();
-		this.raiz = raiz;
-		this.esquerda = null;
-		this.direita = null;
+		this.tree =  new Arvore(root);
 	}
 	public ArvoreBST() {
-		this.raiz = (Integer) null;
-		this.esquerda = null;
-		this.direita = null;
+		super();
+		this.tree = null;
 	}
-	public boolean vazia(){
-		if(raiz == null) {
-			return true;
+	public void inserir(Arvore tree, Integer val) {
+		if(tree.vazia() == true) {
+			tree.setRaiz(val);
 		}else {
-			return false;
-		}
-	}
-	public String preOrder() {
-		if(esquerda == null && direita == null){
-			return getRaiz().toString();
-		}else if(esquerda == null && direita !=null) {
-			return getRaiz()+","+direita.preOrder();
-		}else if(esquerda != null && direita == null) {
-			return getRaiz()+","+esquerda.preOrder();
-		}else {
-			return	getRaiz()+","+esquerda.preOrder()+","+direita.preOrder();
-		}
-	}
-	public String emOrder() {
-		if(esquerda == null && direita == null){
-			return getRaiz().toString();
-		}else if(esquerda == null && direita !=null) {
-			return getRaiz()+","+direita.emOrder();
-		}else if(esquerda != null && direita == null) {
-			return esquerda.emOrder()+","+getRaiz();
-		}else {
-			return	esquerda.emOrder()+","+getRaiz()+","+direita.emOrder();
-		}
-	}
-	public String posOrder() {
-		if(esquerda == null && direita == null){
-			return ","+ getRaiz().toString()+",";
-		}else if(esquerda == null && direita !=null) {
-			return direita.posOrder()+getRaiz()+",";
-		}else if(esquerda != null && direita == null) {
-			return esquerda.posOrder()+getRaiz()+",";
-		}else {
-			return	esquerda.posOrder()+direita.posOrder()+getRaiz();
-		}
-	}
-	public boolean pertence(int info) {
-		if(esquerda == null && direita == null){
-			return raiz.equals(info);
-		}else if (esquerda == null && direita !=null){
-			return (raiz.equals(info))||direita.pertence(info);
-		}else if (esquerda != null && direita ==null){
-			return (raiz.equals(info))||esquerda.pertence(info);
-		}else {
-			return ((raiz.equals(info)) || esquerda.pertence(info) || direita.pertence(info)) ;
-		}
-	}
-	public int altura(){
-		if(vazia() == false) {
-			if(esquerda == null && direita == null){
-				return 0;
-			}else if (esquerda == null && direita !=null){
-				return 1 + direita.altura();
-			}else if (esquerda != null && direita ==null){
-				return 1 + esquerda.altura();
-			}else {
-				if(esquerda.altura()>direita.altura()) {
-					return 1+esquerda.altura();
-				}else {
-					return 1+direita.altura();
-				}
-			}
-		}else
-			return -1;
-	}
-	public int countNo(){
-		if(esquerda == null && direita == null) {
-			return 1;
-		}else if (esquerda == null && direita != null) {
-			return direita.countNo();
-		}else if (esquerda != null && direita == null) {
-			return esquerda.countNo();
-		}else if(raiz != null){
-			return 1+esquerda.countNo()+direita.countNo();
-		}else {
-			return 0;
-		}
-	}
-	public boolean cheia(){
-		if((Math.pow(2, altura()+1)-1) == countNo()) {
-			return true;
-		}else {
-			return false;
-		}
-	}
-	@SuppressWarnings("unused")
-	public boolean completa(int altura){
-		if(esquerda == null && direita == null) {
-			return (raiz != null);
-		}else if (esquerda == null && direita != null) {
-			if (altura <= 1) {
-				return true || direita.completa(altura-1);
-			}else {
-				return false;
-			}
-		}else if (esquerda != null && direita == null) {
-			if (altura <= 1) {
-				return (true || esquerda.completa(altura-1));
-			}else {
-				return false;
-			}
-		}else {
-			return (raiz != null) && esquerda.completa(altura-1) && direita.completa(altura-1);
-		}
-	}
-	public boolean degenerada() {
-		if((esquerda != null && direita != null)|| vazia() == true) {
-			return false;
-		}else if(esquerda != null && direita == null) {
-			return esquerda.degenerada();
-		}else if(esquerda == null && direita != null) {
-			return direita.degenerada();
-		}else {
-			return true;
-		}
-	}
-	public void inserir(Integer val) {
-		if(vazia() == true) {
-			raiz = val;
-		}else {
-			if(val<raiz && esquerda == null) {
-				esquerda = new ArvoreBST(val);
-			}else if(val>=raiz && direita == null) {
-				direita = new ArvoreBST(val);
-			}else if(val<raiz) {
-				esquerda.inserir(val);
-			}else if(val>=raiz) {
-				direita.inserir(val);
+			if(val<tree.getRaiz() && tree.getEsquerda() == null) {
+				tree.setEsquerda(new Arvore(val));
+			}else if(val>=tree.getRaiz() && tree.getDireita() == null) {
+				tree.setDireita(new Arvore(val));
+			}else if(val<tree.getRaiz()) {
+				inserir(tree.getEsquerda(), val);
+			}else if(val>=tree.getRaiz()) {
+				inserir(tree.getDireita(), val);
 			}
 		}
 	}
-	public int buscarMin() {
-		if(esquerda == null) {
-			return raiz;
+	public Arvore buscarMin(Arvore tree) {
+		if(tree.getEsquerda() == null) {
+			return tree;
 		}else {
-			return esquerda.buscarMin();
+			return buscarMin(tree.getEsquerda());
 		}
 	}
-	public int buscarMax() {
-		if(direita == null) {
-			return raiz;
+	public Arvore buscarMax(Arvore tree) {
+		if(tree.getDireita() == null) {
+			return tree;
 		}else{
-			return direita.buscarMax();
+			return buscarMax(tree.getDireita());
 		}
 	}
-	public boolean buscar(Integer val) {
-		if(raiz == val) {
-			return true;
-		}else if(val > raiz && direita != null) {
-			return direita.buscar(val);
-		}else if(val < raiz && esquerda != null) {
-			return esquerda.buscar(val);
-		}else {
-			return false;
-		}
-	}
-	public Integer Sucessor(Integer num) {
-		if(esquerda != null &&(esquerda.raiz > num || (esquerda.raiz>= num && esquerda.direita != null))) {
-			return esquerda.Sucessor(num);
-		}else if(direita != null &&(direita.raiz < num || (direita.raiz<= num && direita.direita != null))) {
-			return direita.Sucessor(num);
-		}else if(raiz > num) {
-			return raiz;
-		}else if(direita.raiz > num) {
-			return direita.Sucessor(num);
+	public Arvore buscar(Arvore tree , Integer val) {
+		if(tree.getRaiz() == val) {
+			return tree;
+		}else if(val > tree.getRaiz() && tree.getDireita() != null) {
+			return buscar(tree.getDireita(),val);
+		}else if(val < tree.getRaiz() && tree.getEsquerda() != null) {
+			return buscar(tree.getEsquerda(),val);
 		}else {
 			return null;
 		}
 	}
-	
-	public ArvoreBST returnDireita(Integer num){
-		if(raiz == num) {
-			return direita;
-		}else if(num > raiz && direita != null) {
-			return direita.returnDireita(num);
-		}else if(num < raiz && esquerda != null) {
-			return esquerda.returnDireita(num);
+	public Arvore buscarPai(Arvore tree , Integer val) {
+		if(tree.getDireita() != null && tree.getDireita().getRaiz() == val) {
+			return tree;
+		}else if(tree.getEsquerda() != null && tree.getEsquerda().getRaiz() == val) {
+			return tree;
+		}else if(val > tree.getRaiz() && tree.getDireita() != null) {
+			return buscarPai(tree.getDireita(),val);
+		}else if(val < tree.getRaiz() && tree.getEsquerda() != null) {
+			return buscarPai(tree.getEsquerda(),val);
 		}else {
 			return null;
 		}
 	}
-	public void remover(Integer val) {
-		if(direita.raiz == val) {
-			if(direita.direita == null && direita.esquerda == null) {
-				direita = null;
-			}else if(direita.direita != null && direita.esquerda == null){
-				direita = direita.direita;
-			}else if(direita.direita == null && direita.esquerda != null){
-				direita = direita.esquerda;
+	public Arvore Sucessor(Arvore tree , Integer num) {
+		Arvore elemento = buscar(tree, num);
+		if(elemento.getDireita() != null) {
+			return buscarMin(elemento.getDireita());
+		}else if(tree.getDireita() != null) {
+			return buscarPai(tree, num);
+		}else {
+			return null;
+		}
+	}
+	public void remover(Arvore tree,Integer val) {
+		Arvore elemento = buscar(tree, val);
+		if(elemento == null) {
+			return;
+		}
+		Arvore pai = buscarPai(tree,val);
+		if (elemento.getDireita() != null && elemento.getEsquerda() != null) {
+			Arvore y = Sucessor(tree, val);
+			Arvore paiy = buscarPai(tree,y.getRaiz());
+			elemento.setRaiz(y.getRaiz());
+			if(paiy.getDireita() == y) {
+				paiy.setDireita(y.getDireita());
 			}else {
-				int sucessor = direita.Sucessor(val);
-				ArvoreBST direitaSucessor = direita.returnDireita(sucessor);
-				direita.raiz = sucessor;
-				direita.direita = direitaSucessor;
+				paiy.setEsquerda(y.getDireita());
 			}
-		}if(esquerda.raiz == val) {
-			if(esquerda.direita == null && esquerda.esquerda == null) {
-				esquerda = null;
-			}else if(esquerda.direita != null && esquerda.esquerda == null){
-				esquerda = esquerda.direita;
-			}else if(esquerda.direita == null && esquerda.esquerda != null){
-				esquerda = esquerda.esquerda;
+		}else if (pai == null){
+			if(tree.getDireita() != null) {
+				tree.setRaiz(tree.getDireita().getRaiz());
+				tree.setDireita(null);
+			}else if(tree.getEsquerda() != null) {
+				tree.setRaiz(tree.getEsquerda().getRaiz());
+				tree.setEsquerda(null);
 			}else {
-				int sucessor = esquerda.Sucessor(val);
-				ArvoreBST direitaSucessor = esquerda.returnDireita(sucessor);
-				esquerda.raiz = sucessor;
-				esquerda.direita = direitaSucessor;
+				tree.setRaiz(null);
 			}
-		}else if(val > raiz && direita != null) {
-			direita.remover(val);
-		}else if(val < raiz && esquerda != null) {
-			esquerda.remover(val);
+		}else if(elemento.getDireita() == null && elemento.getEsquerda() == null) {
+			
+			if(pai.getDireita() ==  elemento) {
+				pai.setDireita(null);
+			}else {
+				pai.setEsquerda(null);
+			}
+		}else if(elemento.getDireita() != null && elemento.getEsquerda() == null) {
+			if(pai.getDireita() ==  elemento) {
+				pai.setDireita(elemento.getDireita());
+			}else {
+				pai.setEsquerda(elemento.getDireita());
+			}
+		}else if(elemento.getDireita() == null && elemento.getEsquerda() != null) {
+			if(pai.getDireita() ==  elemento) {
+				pai.setDireita(elemento.getEsquerda());
+			}else {
+				pai.setEsquerda(elemento.getEsquerda());
+			}
 		}
 	}
 	
