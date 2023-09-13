@@ -1,40 +1,17 @@
 package arvoreAvl;
 
-public class ArvoreAVL {
-	private No tree;
+import arvoreBst.ArvoreBST;
 
-	public No getTree() {
-		return tree;
+public class ArvoreAVL extends ArvoreBST{
+
+	public ArvoreAVL() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setTree(No tree) {
-		this.tree = tree;
+	public ArvoreAVL(Integer root) {
+		super(root);
+		// TODO Auto-generated constructor stub
 	}
-	public boolean vazia(){
-		if(tree.getRaiz() == null) {
-			return true;
-		}else {
-			return false;
-		}
-	}
-	/*
-	public int altura(){
-		if(vazia() == false) {
-			if(tree.getEsquerda() == null && tree.getDireita() == null){
-				return 0;
-			}else if (tree.getEsquerda() == null && direita !=null){
-				return 1 + tree.getEsquerda().altura();
-			}else if (tree.getEsquerda() != null && direita ==null){
-				return 1 + esquerda.altura();
-			}else {
-				if(esquerda.altura()>direita.altura()) {
-					return 1+esquerda.altura();
-				}else {
-					return 1+direita.altura();
-				}
-			}
-		}else
-			return -1;
-	}
-	*/	
+	
 }
