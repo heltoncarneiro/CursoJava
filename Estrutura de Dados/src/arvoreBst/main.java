@@ -23,13 +23,16 @@ public class main {
 		System.out.println(arvore.buscar(5));
 		System.out.println(arvore.buscar(6));
 		System.out.println(arvore.buscar(7));
-		System.out.println("sucessor de 2: "+arvore.Sucessor(2));
-		System.out.println("sucessor de 1: "+arvore.Sucessor(1));
-		System.out.println("sucessor de -1: "+arvore.Sucessor(-1));
-		System.out.println("sucessor de 3: "+arvore.Sucessor(3));
-		System.out.println("sucessor de 4: "+arvore.Sucessor(4));
-		System.out.println("sucessor de 5: "+arvore.Sucessor(5));
-		/*ArvoreBST arvore2 = new ArvoreBST(3);
+		System.out.println("sucessor de 2: "+arvore.sucessor(2));
+		System.out.println("sucessor de 1: "+arvore.sucessor(1));
+		System.out.println("sucessor de -1: "+arvore.sucessor(-1));
+		System.out.println("sucessor de 3: "+arvore.sucessor(3));
+		System.out.println("sucessor de 4: "+arvore.sucessor(4));
+		System.out.println("sucessor de 5: "+arvore.sucessor(5));
+		System.out.println("sucessor de 6: "+arvore.sucessor(6));
+		*/
+		/*
+		ArvoreBST arvore2 = new ArvoreBST(3);
 		arvore2.inserir(2);
 		arvore2.inserir(1);
 		arvore2.inserir(0);
@@ -43,7 +46,8 @@ public class main {
 		System.out.println(arvore2.buscar(1));
 		System.out.println(arvore2.buscar(2));
 		System.out.println(arvore2.buscar(3));
-		System.out.println(arvore2.buscar(4));*/
+		System.out.println(arvore2.buscar(4));
+		*/
 		/*
 		ArvoreBST arvore = new ArvoreBST(20);
 		arvore.inserir(19);
@@ -98,41 +102,52 @@ public class main {
 		
 		
 		ArvoreBST arvore = new ArvoreBST(15);
-		arvore.inserir(arvore.getTree(), 6);
-		arvore.inserir(arvore.getTree(), 1);
-		arvore.inserir(arvore.getTree(), 9);
-		arvore.inserir(arvore.getTree(), 7);
-		arvore.inserir(arvore.getTree(), 8);
-		arvore.inserir(arvore.getTree(), 14);
-		arvore.inserir(arvore.getTree(), 18);
-		arvore.inserir(arvore.getTree(), 16);
-		arvore.inserir(arvore.getTree(), 17);
-		arvore.inserir(arvore.getTree(), 22);
+		arvore.inserir(6);
+		arvore.inserir(1);
+		arvore.inserir(9);
+		arvore.inserir(7);
+		arvore.inserir(8);
+		arvore.inserir(14);
+		arvore.inserir(18);
+		arvore.inserir(16);
+		arvore.inserir(17);
+		arvore.inserir(22);
 		System.out.println(arvore.getTree().preOrder());
-		arvore.remover(arvore.getTree(), 1);
-		System.out.println(arvore.getTree().preOrder());
-		arvore.remover(arvore.getTree(), 14);
-		System.out.println(arvore.getTree().preOrder());
-		arvore.remover(arvore.getTree(), 18);
-		System.out.println(arvore.getTree().preOrder());
-		arvore.remover(arvore.getTree(), 22);
-		System.out.println(arvore.getTree().preOrder());
-		arvore.remover(arvore.getTree(), 6);
-		System.out.println(arvore.getTree().preOrder());
-		arvore.remover(arvore.getTree(), 8);
-		System.out.println(arvore.getTree().preOrder());
-		arvore.remover(arvore.getTree(), 7);
-		System.out.println(arvore.getTree().preOrder());
-		arvore.remover(arvore.getTree(), 16);
-		System.out.println(arvore.getTree().preOrder());
-		arvore.remover(arvore.getTree(), 15);
-		System.out.println(arvore.getTree().preOrder());
-		arvore.remover(arvore.getTree(), 17);
-		System.out.println(arvore.getTree().preOrder());
-		arvore.remover(arvore.getTree(), 9);
-		System.out.println(arvore.getTree().preOrder());
-		arvore.inserir(arvore.getTree(), 50);
-		System.out.println(arvore.getTree().preOrder());
+		System.out.println("\n\n\nRemovendo o valor 1\nantes: "+arvore.getTree().preOrder());
+		arvore.remover(1);
+		System.out.println("Depois: "+arvore.getTree().preOrder());
+		System.out.println("\n\n\nRemovendo o valor 14\nantes: "+arvore.getTree().preOrder());
+		arvore.remover(14);
+		System.out.println("Depois: "+arvore.getTree().preOrder());
+		System.out.println("\n\n\nRemovendo o valor 18\nantes: "+arvore.getTree().preOrder());
+		arvore.remover(18);
+		System.out.println("Depois: "+arvore.getTree().preOrder());
+		System.out.println("\n\n\nRemovendo o valor 22\nantes: "+arvore.getTree().preOrder());
+		arvore.remover(22);
+		System.out.println("Depois: "+arvore.getTree().preOrder());
+		System.out.println("\n\n\nRemovendo o valor 6\nantes: "+arvore.getTree().preOrder());
+		arvore.remover(6);
+		System.out.println("Depois: "+arvore.getTree().preOrder());
+		System.out.println("\n\n\nRemovendo o valor 8\nantes: "+arvore.getTree().preOrder());
+		arvore.remover(8);
+		System.out.println("Depois: "+arvore.getTree().preOrder());
+		System.out.println("\n\n\nRemovendo o valor 7\nantes: "+arvore.getTree().preOrder());
+		arvore.remover(7);
+		System.out.println("Depois: "+arvore.getTree().preOrder());
+		System.out.println("\n\n\nRemovendo o valor 16\nantes: "+arvore.getTree().preOrder());
+		arvore.remover(16);
+		System.out.println("Depois: "+arvore.getTree().preOrder());
+		System.out.println("\n\n\nRemovendo o valor 15\nantes: "+arvore.getTree().preOrder());
+		arvore.remover(15);
+		System.out.println("Depois: "+arvore.getTree().preOrder());
+		System.out.println("\n\n\nRemovendo o valor 17\nantes: "+arvore.getTree().preOrder());
+		arvore.remover(17);
+		System.out.println("Depois: "+arvore.getTree().preOrder());
+		System.out.println("\n\n\nRemovendo o valor 9\nantes: "+arvore.getTree().preOrder());
+		arvore.remover(9);
+		System.out.println("Depois: "+arvore.getTree().preOrder());
+		arvore.inserir(50);
+		System.out.println("\n\nInserindo o valor 50:"+arvore.getTree().preOrder());
 		
 	}
 

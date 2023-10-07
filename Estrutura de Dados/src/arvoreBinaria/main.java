@@ -10,13 +10,13 @@ public class main {
 		ArvoreBinaria arvore4 = new ArvoreBinaria();
 		/* 
 			arvore = 
-						  A4
+						  A
 					     / \
 					    /   \
-					   B2     E5
+					   B     E
  					  / \	  \
 					 /   \	   \	
-					C1     D3     F6
+					C     D     F
 			
 			
 			arvore 2 = 

@@ -17,7 +17,19 @@ public class ArvoreBST {
 		super();
 		this.tree = null;
 	}
-	public void inserir(Arvore tree, Integer val) {
+	public void inserir(Integer val) {
+		inserirArvore(getTree(), val);
+	}
+	public String preOrder() {
+		return tree.preOrder();
+	}
+	public String posOrder() {
+		return tree.posOrder();
+	}
+	public String emOrder() {
+		return tree.emOrder();
+	}
+	private void inserirArvore(Arvore tree, Integer val) {
 		if(tree.vazia() == true) {
 			tree.setRaiz(val);
 		}else {
@@ -26,69 +38,99 @@ public class ArvoreBST {
 			}else if(val>=tree.getRaiz() && tree.getDireita() == null) {
 				tree.setDireita(new Arvore(val));
 			}else if(val<tree.getRaiz()) {
-				inserir(tree.getEsquerda(), val);
+				inserirArvore(tree.getEsquerda(), val);
 			}else if(val>=tree.getRaiz()) {
-				inserir(tree.getDireita(), val);
+				inserirArvore(tree.getDireita(), val);
 			}
 		}
 	}
-	public Arvore buscarMin(Arvore tree) {
+	public Integer buscarMin() {
+		return buscarMinArvore(getTree()).getRaiz();
+	}
+	private Arvore buscarMinArvore(Arvore tree) {
 		if(tree.getEsquerda() == null) {
 			return tree;
 		}else {
-			return buscarMin(tree.getEsquerda());
+			return buscarMinArvore(tree.getEsquerda());
 		}
 	}
-	public Arvore buscarMax(Arvore tree) {
+	public Integer buscarMax() {
+		return buscarMaxArvore(getTree()).getRaiz();
+	}
+	private Arvore buscarMaxArvore(Arvore tree) {
 		if(tree.getDireita() == null) {
 			return tree;
 		}else{
-			return buscarMax(tree.getDireita());
+			return buscarMaxArvore(tree.getDireita());
 		}
 	}
-	public Arvore buscar(Arvore tree , Integer val) {
+	public Arvore buscar(Integer val){
+		return buscarArvore(getTree(), val);
+	}
+	private Arvore buscarArvore(Arvore tree , Integer val) {
 		if(tree.getRaiz() == val) {
 			return tree;
 		}else if(val > tree.getRaiz() && tree.getDireita() != null) {
-			return buscar(tree.getDireita(),val);
+			return buscarArvore(tree.getDireita(),val);
 		}else if(val < tree.getRaiz() && tree.getEsquerda() != null) {
-			return buscar(tree.getEsquerda(),val);
+			return buscarArvore(tree.getEsquerda(),val);
 		}else {
 			return null;
 		}
 	}
-	public Arvore buscarPai(Arvore tree , Integer val) {
+	public Arvore buscarPai(Integer val) {
+		return buscarPaiArvore(getTree(), val);
+	}
+	private Arvore buscarPaiArvore(Arvore tree , Integer val) {
 		if(tree.getDireita() != null && tree.getDireita().getRaiz() == val) {
 			return tree;
 		}else if(tree.getEsquerda() != null && tree.getEsquerda().getRaiz() == val) {
 			return tree;
 		}else if(val > tree.getRaiz() && tree.getDireita() != null) {
-			return buscarPai(tree.getDireita(),val);
+			return buscarPaiArvore(tree.getDireita(),val);
 		}else if(val < tree.getRaiz() && tree.getEsquerda() != null) {
-			return buscarPai(tree.getEsquerda(),val);
+			return buscarPaiArvore(tree.getEsquerda(),val);
 		}else {
 			return null;
 		}
 	}
-	public Arvore Sucessor(Arvore tree , Integer num) {
-		Arvore elemento = buscar(tree, num);
+	public Integer sucessor(Integer num){
+		try {
+			return sucessorArvore(tree, num).getRaiz();
+		} catch (NullPointerException e) {
+			return null;
+		}
+	}
+	private Arvore sucessorArvore(Arvore tree , Integer num) {
+		Arvore elemento = buscarArvore(tree, num);
 		if(elemento.getDireita() != null) {
-			return buscarMin(elemento.getDireita());
-		}else if(tree.getDireita() != null) {
-			return buscarPai(tree, num);
-		}else {
-			return null;
+			return buscarMinArvore(elemento.getDireita());	
+		}else if(elemento.getDireita() == null && elemento.getEsquerda() == null) {
+			Arvore pai = buscarPaiArvore(tree, num);
+			if(buscarMax() <= num) {
+				return null;
+			}else if(pai.getRaiz() > num) {
+				return pai;
+			}else{
+				return buscarPaiArvore(tree, pai.getRaiz());
+			}
+		}else if(elemento.getDireita() != null || elemento.getEsquerda() != null) {
+			return buscarPaiArvore(tree, num);
 		}
+		return null;
 	}
-	public void remover(Arvore tree,Integer val) {
-		Arvore elemento = buscar(tree, val);
+	public void remover(Integer val) {
+		removerArvore(getTree(), val);
+	}
+	private void removerArvore(Arvore tree,Integer val) {
+		Arvore elemento = buscarArvore(tree, val);
 		if(elemento == null) {
 			return;
 		}
-		Arvore pai = buscarPai(tree,val);
+		Arvore pai = buscarPaiArvore(tree,val);
 		if (elemento.getDireita() != null && elemento.getEsquerda() != null) {
-			Arvore y = Sucessor(tree, val);
-			Arvore paiy = buscarPai(tree,y.getRaiz());
+			Arvore y = sucessorArvore(tree, val);
+			Arvore paiy = buscarPaiArvore(tree,y.getRaiz());
 			elemento.setRaiz(y.getRaiz());
 			if(paiy.getDireita() == y) {
 				paiy.setDireita(y.getDireita());
