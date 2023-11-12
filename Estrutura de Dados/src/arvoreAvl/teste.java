@@ -7,173 +7,320 @@ import org.junit.jupiter.api.Test;
 
 class teste {
 
-	@Test
-	@DisplayName("1) inserÁıes simples que n„o requeiram balanceamento (0,5)")
-	void test1() {
-		ArvoreAVL tree = new ArvoreAVL();
-		tree.inserir(5);
-		tree.inserir(3);
-		tree.inserir(7);
-		tree.inserir(1);
-		tree.inserir(4);
-		tree.inserir(9);
-		assertEquals("5(0) 3(0) 1(0) 4(0) 7(-1) 9(0)", tree.preOrder());
-	}
-	
-	@Test
-	@DisplayName("2) remoÁ„o de nÛ sem filhos (0,5)")
-	void test2() {
-		ArvoreAVL tree = new ArvoreAVL();
-		tree.inserir(5);
-		tree.inserir(3);
-		tree.inserir(7);
-		tree.inserir(1);
-		tree.inserir(4);
-		tree.inserir(9);
+	//1-inser√ß√µes simples que n√£o requeiram balanceamento (0,5)
+		@Test
+		void test() {
+	        @SuppressWarnings("rawtypes")
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(12);
+			avl.insere(20);
+			
+			assertEquals("10(0)5(1)1(0)16(0)12(0)20(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+		}
 		
-		tree.remover(4);
-		assertEquals("5(0) 3(1) 1(0) 7(-1) 9(0)", tree.preOrder());
-	}
-	
-	@Test
-	@DisplayName("3) remoÁ„o de nÛ com 1 filho ‡ direita (0,5)")
-	void test3() {
-		ArvoreAVL tree = new ArvoreAVL();
-		tree.inserir(5);
-		tree.inserir(3);
-		tree.inserir(7);
-		tree.inserir(1);
-		tree.inserir(4);
-		tree.inserir(9);
+	    //2-remo√ß√£o de n√≥ sem filhos (0,5)
+		@Test
+		void test2() {
+	        AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(12);
+			avl.insere(20);
+			avl.remove(12);
+			assertEquals("10(0)5(1)1(0)16(-1)20(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+		} 
+			
+		//3-remo√ß√£o de n√≥ com 1 filho √† direita (0,5)
+		@Test
+		void test3() {
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(7);
+			avl.insere(12);
+			avl.insere(20);
+			avl.remove(5);
+			assertEquals("10(-1)7(0)16(0)12(0)20(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+
+	    } 
 		
-		tree.remover(7);
-		assertEquals("5(1) 3(0) 1(0) 4(0) 9(0)", tree.preOrder());
-	}
-	
-	@Test
-	@DisplayName("4) remoÁ„o de nÛ com 1 filho ‡ esquerda (0,5)")
-	void test4() {
-		ArvoreAVL tree = new ArvoreAVL();
-		tree.inserir(5);
-		tree.inserir(3);
-		tree.inserir(7);
-		tree.inserir(1);
+		//4-remo√ß√£o de n√≥ com 1 filho √† esquerda (0,5)
+		@Test
+		void test4() {
+			
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(12);
+			avl.insere(20);
+			avl.remove(5);
+			assertEquals("10(-1)1(0)16(0)12(0)20(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    } 
 		
-		tree.remover(3);
-		assertEquals("5(0) 1(0) 7(0)", tree.preOrder());
-	}
-	
-	@Test
-	@DisplayName("5) remoÁ„o de nÛ com 2 filhos, e que seja um filho ‡ direita (0,5)")
-	void test5() {
-		ArvoreAVL tree = new ArvoreAVL();
-		tree.inserir(15);
-		tree.inserir(6);
-		tree.inserir(18);
-		tree.inserir(1);
-		tree.inserir(9);
-		tree.inserir(16);
-		tree.inserir(22);
-		tree.inserir(24);
+		//5-remo√ß√£o de n√≥ com 2 filhos, e que seja um filho √† direita (0,5)
+		@Test
+		void test5() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(12);
+			avl.insere(20);
+			avl.remove(16);
+			assertEquals("10(0)5(1)1(0)20(1)12(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
 		
-		tree.remover(18);
-		assertEquals("15(0) 6(0) 1(0) 9(0) 22(0) 16(0) 24(0)", tree.preOrder());
+		//6-remo√ß√£o de n√≥ com 2 filhos, e que seja um filho √† esquerda (0,5)
+		@Test
+		void test6() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(7);
+			avl.insere(12);
+			avl.insere(20);
+			avl.insere(6);
+			avl.remove(5);
+			assertEquals("10(0)6(0)1(0)7(0)16(0)12(0)20(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
 		
-	}
-	
-	@Test
-	@DisplayName("6) remoÁ„o de nÛ com 2 filhos, e que seja um filho ‡ esquerda (0,5)")
-	void test6() {
-		ArvoreAVL tree = new ArvoreAVL();
-		tree.inserir(15);
-		tree.inserir(6);
-		tree.inserir(18);
-		tree.inserir(1);
-		tree.inserir(9);
-		tree.inserir(16);
-		tree.inserir(22);
-		tree.inserir(7);
-		tree.inserir(14);
-		tree.inserir(17);
-		tree.inserir(8);
+		//7-inser√ß√£o que requer rota√ß√£o simples √† direita (0,5)
+		@Test
+		void test7() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(12);
+			avl.insere(20);
+			avl.insere(0);
+			assertEquals("10(0)1(0)0(0)5(0)16(0)12(0)20(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
 		
-		tree.remover(6);
-		assertEquals("15(0) 7(-1) 1(0) 9(0) 8(0) 14(0) 18(1) 16(-1) 17(0) 22(0)", tree.preOrder());
+		//8-inser√ß√£o que requer rota√ß√£o simples √† direita (0,5)
+		@Test
+		void test8() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(8);
+			avl.insere(12);
+			avl.insere(11);
+			assertEquals("10(0)5(0)1(0)8(0)12(0)11(0)16(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
 		
-	}
-	
-	@Test
-	@DisplayName("7) inserÁ„o que requer rotaÁ„o simples ‡ direita (0,5)")
-	void test7() {
-		ArvoreAVL tree = new ArvoreAVL();
-		tree.inserirAVL(15);
-		tree.inserirAVL(14);
-		tree.inserirAVL(13);
-		assertEquals("14(0) 13(0) 15(0)", tree.preOrder());
+		//9-inser√ß√£o que requer rota√ß√£o simples √† esquerda (0,5)
+		@Test
+		void test9() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(8);
+			avl.insere(20);
+			avl.insere(22);
+			assertEquals("10(0)5(0)1(0)8(0)20(0)16(0)22(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
 		
-	}
-	
-	@Test
-	@DisplayName("8) inserÁ„o que requer rotaÁ„o simples ‡ direita (0,5)")
-	void test8() {
-		ArvoreAVL tree = new ArvoreAVL();
-		tree.inserirAVL(5);
-		tree.inserirAVL(4);
-		tree.inserirAVL(6);
-		tree.inserirAVL(3);
-		tree.inserirAVL(7);
-		tree.inserirAVL(2);
-		assertEquals("5(0) 3(0) 2(0) 4(0) 6(-1) 7(0)", tree.preOrder());
+		//10-inser√ß√£o que requer rota√ß√£o simples √† esquerda (0,5)
+		@Test
+		void test10() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(12);
+			avl.insere(8);
+			avl.insere(11);
+			avl.insere(16);
+			avl.insere(9);
+			assertEquals("10(0)8(0)5(0)9(0)12(0)11(0)16(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
 		
-	}
-	
-	@Test
-	@DisplayName("9) inserÁ„o que requer rotaÁ„o simples ‡ esquerda (0,5)")
-	void test9() {
-		ArvoreAVL tree = new ArvoreAVL();
-		tree.inserirAVL(15);
-		tree.inserirAVL(16);
-		tree.inserirAVL(17);
-		assertEquals("16(0) 15(0) 17(0)", tree.preOrder());
+		//11-inser√ß√£o que requer rota√ß√£o dupla √† direita (0,5)
+		@Test
+		void test11() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(15);
+			avl.insere(1);
+			avl.insere(7);
+			avl.insere(12);
+			avl.insere(20);
+			avl.insere(-2);
+			avl.insere(3);
+			avl.insere(2);
+			assertEquals("10(1)3(0)1(0)-2(0)2(0)5(-1)7(0)15(0)12(0)20(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
 		
-	}
-	
-	@Test
-	@DisplayName("10) inserÁ„o que requer rotaÁ„o simples ‡ esquerda (0,5)")
-	void test10() {
-		ArvoreAVL tree = new ArvoreAVL();
-		tree.inserirAVL(5);
-		tree.inserirAVL(3);
-		tree.inserirAVL(6);
-		tree.inserirAVL(2);
-		tree.inserirAVL(7);
-		tree.inserirAVL(8);
-		assertEquals("5(0) 3(1) 2(0) 7(0) 6(0) 8(0)", tree.preOrder());
+		//12-inser√ß√£o que requer rota√ß√£o dupla √† esquerda (0,5)
+		@Test
+		void test12() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(15);
+			avl.insere(1);
+			avl.insere(7);
+			avl.insere(12);
+			avl.insere(20);
+			avl.insere(17);
+			avl.insere(18);
+			assertEquals("10(-1)5(0)1(0)7(0)15(-1)12(0)18(0)17(0)20(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
 		
-	}
-	
-	@Test
-	@DisplayName("11) inserÁ„o que requer rotaÁ„o dupla ‡ direita (0,5)")
-	void test11() {
-		ArvoreAVL tree = new ArvoreAVL();
-		tree.inserirAVL(8);
-		tree.inserirAVL(6);
-		tree.inserirAVL(20);
-		tree.inserirAVL(3);
-		tree.inserirAVL(7);
-		tree.inserirAVL(18);
-		tree.inserirAVL(30);
-		tree.inserirAVL(2);
-		tree.inserirAVL(5);
-		tree.inserirAVL(10);
-		tree.inserirAVL(19);
-		tree.inserirAVL(25);
-		tree.inserirAVL(35);
-		tree.inserirAVL(4);
+		//13-remo√ß√£o que requer balanceamento (rota√ß√£o simples dir) (0,5)
+		@Test
+		void test13() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(7);
+			avl.insere(20);
+			avl.remove(16);
+			avl.remove(20);
+			assertEquals("5(-1)1(0)10(1)7(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
 		
-		assertEquals("8(0) 5(0) 3(0) 2(0) 4(0) 6(-1) 7(0) 20(0) 18(0) 10(0) 19(0) 30(0) 25(0) 35(0)", tree.preOrder());
+		//14-remo√ß√£o que requer balanceamento (rota√ß√£o simples esq) (0,5)
+		@Test
+		void test14() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(7);
+			avl.insere(20);
+			avl.insere(9);
+			avl.remove(1);
+			assertEquals("10(0)7(0)5(0)9(0)16(-1)20(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
 		
-	}
-	
+		//15-inser√ß√£o que requer balanceamento seguido de remo√ß√£o que tamb√©m requer balanceamento (0,5)
+		@Test
+		void test15() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(7);
+			avl.insere(13);
+			avl.insere(20);
+			avl.insere(8);
+			avl.insere(22);
+			avl.insere(9);
+			avl.remove(1);
+			assertEquals("10(0)8(1)5(-1)7(0)9(0)16(-1)13(0)20(-1)22(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
+		
+		//16-inser√ß√£o que requer balanceamento seguido de remo√ß√£o que tamb√©m requer balanceamento (0,5)
+		@Test
+		void test16() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(7);
+			avl.insere(13);
+			avl.insere(20);
+			avl.insere(8);
+			avl.insere(18);
+			avl.insere(19);
+			avl.remove(13);
+			assertEquals("10(0)5(-1)1(0)7(-1)8(0)19(1)16(-1)18(0)20(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
+		
+		//17-esvaziar AVL e reinserir elementos (0,5)
+		@Test
+		void test17() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.remove(10);
+			avl.remove(5);
+			avl.remove(16);
+			avl.insere(100);
+			avl.insere(50);
+			avl.insere(150);
+			assertEquals("100(0)50(0)150(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
+		
+		//18-esvaziar AVL e reinserir elementos (0,5)
+		@Test
+		void test18() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.remove(10);
+			avl.remove(5);
+			avl.remove(16);
+			avl.insere(100);
+			avl.insere(50);
+			avl.insere(1);
+			assertEquals("50(0)1(0)100(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+
+	    }
+		//19-remo√ß√£o que requer balanceamento (rota√ß√£o simples dir) (0,5)
+		@Test
+		void test19() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(7);
+			avl.insere(12);
+			avl.insere(20);
+			avl.insere(8);
+			avl.insere(11);
+			avl.insere(14);
+			avl.insere(17);
+			avl.insere(22);
+			avl.insere(15);
+			avl.remove(8);
+			assertEquals("12(0)10(1)5(0)1(0)7(0)11(0)16(0)14(-1)15(0)20(0)17(0)22(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
+		
+		//20-remo√ß√£o que requer balanceamento (rota√ß√£o simples dir) (0,5)
+		@Test
+		void test20() {
+				
+			AVL avl = new AVL(10);
+			avl.insere(5);
+			avl.insere(16);
+			avl.insere(1);
+			avl.insere(7);
+			avl.insere(12);
+			avl.insere(20);
+			avl.insere(8);
+			avl.insere(11);
+			avl.insere(14);
+			avl.insere(17);
+			avl.insere(22);
+			avl.insere(15);
+			avl.remove(8);
+			avl.remove(12);
+			avl.remove(15);
+			assertEquals("14(0)10(1)5(0)1(0)7(0)11(0)20(1)16(-1)17(0)22(0)",avl.preOrdem().replace(" ", "").replace(",", ""));
+	    }
 
 }

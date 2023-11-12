@@ -19,7 +19,7 @@ public class ArvoreBST {
 		this.tree = null;
 	}
 	public ArvoreBinaria inserir(Integer val) {
-		if(tree == null) {
+		if(tree.vazia()) {
 			tree = new ArvoreBinaria(val);
 			return tree;
 		}else {
@@ -36,25 +36,27 @@ public class ArvoreBST {
 		return tree.emOrder();
 	}
 	private ArvoreBinaria inserirArvore(ArvoreBinaria tree, Integer val) {
-		if(val<tree.getRaiz() && tree.getEsquerda() == null) {
+		if(tree != null && val<tree.getRaiz() && tree.getEsquerda() == null) {
 			tree.setEsquerda(new ArvoreBinaria(val));
 			atualizarFatoresDeBalanceamentos(tree);
 			return tree;
-		}else if(val>=tree.getRaiz() && tree.getDireita() == null) {
+		}else if(tree != null && val>=tree.getRaiz() && tree.getDireita() == null) {
 			tree.setDireita(new ArvoreBinaria(val));
 			atualizarFatoresDeBalanceamentos(tree);
 			return tree;
-		}else if(val<tree.getRaiz()) {
+		}else if(tree != null && val<tree.getRaiz()) {
 			 return inserirArvore(tree.getEsquerda(), val);
-		}else if(val>=tree.getRaiz()) {
+		}else if(tree != null && val>=tree.getRaiz()) {
 			 return inserirArvore(tree.getDireita(), val);
 		}
 		return null;
 	}
 	public void atualizarFatoresDeBalanceamentos(ArvoreBinaria tree){
-		tree.atualizarFatorBalanceamento();
-		for(ArvoreBinaria i = tree; i != null; i = buscarPai(i.getRaiz())){
-			i.atualizarFatorBalanceamento();
+		if(tree != null) {
+			tree.atualizarFatorBalanceamento();
+			for(ArvoreBinaria i = tree; i != null; i = buscarPai(i.getRaiz())){
+				i.atualizarFatorBalanceamento();
+			}
 		}
 	}
 	public Integer buscarMin() {
@@ -138,7 +140,7 @@ public class ArvoreBST {
 	private ArvoreBinaria removerArvore(ArvoreBinaria tree,Integer val) {
 		ArvoreBinaria elemento = buscarArvore(tree, val);
 		if(elemento == null) {
-			System.out.println("elemento "+val+" não existe");
+			System.out.println("elemento "+val+" nï¿½o existe");
 			return null;
 		}
 		ArvoreBinaria pai = buscarPaiArvore(tree,val);
