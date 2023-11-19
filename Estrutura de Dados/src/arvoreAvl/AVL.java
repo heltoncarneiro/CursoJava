@@ -32,7 +32,6 @@ public class AVL extends ArvoreBST{
 			EsquerdaDeElementoCritico.setDireita(critico);
 			critico.atualizarFatorBalanceamento();
 			EsquerdaDeElementoCritico.atualizarFatorBalanceamento();
-			System.out.println(EsquerdaDeElementoCritico.preOrder());
 		}
 		atualizarFatoresDeBalanceamentos(critico);
 	}
@@ -40,7 +39,7 @@ public class AVL extends ArvoreBST{
 		ArvoreBinaria pai = buscarPai(critico.getRaiz());
 		if(critico == getTree()) {
 			setTree(critico.getDireita());
-			critico.setDireita(null);
+			critico.setDireita(critico.getDireita().getEsquerda());
 			getTree().setEsquerda(critico);
 		}else {
 			ArvoreBinaria direitaDeElementoCritico = critico.getDireita();
@@ -52,6 +51,8 @@ public class AVL extends ArvoreBST{
 			}
 			critico.setDireita(esquerdaDoFilhodireitaDeElementoCritico);
 			direitaDeElementoCritico.setEsquerda(critico);
+			critico.atualizarFatorBalanceamento();
+			direitaDeElementoCritico.atualizarFatorBalanceamento();
 		}
 		atualizarFatoresDeBalanceamentos(critico);
 	}
@@ -60,28 +61,42 @@ public class AVL extends ArvoreBST{
 		rotSimplesEsquerda(critico.getEsquerda());
 		ArvoreBinaria esquerdaDeCritico = critico.getEsquerda();
 		ArvoreBinaria direitaDeEsquerdaDeCritico = esquerdaDeCritico.getDireita();
-		if(pai.getRaiz().intValue() <= critico.getRaiz().intValue()) {
-			pai.setDireita(esquerdaDeCritico);
+		if(critico == getTree()) {
+			setTree(esquerdaDeCritico);
+			critico.setEsquerda(direitaDeEsquerdaDeCritico);
+			getTree().setDireita(critico);
 		}else {
-			pai.setEsquerda(esquerdaDeCritico);
+			if(pai.getRaiz().intValue() <= critico.getRaiz().intValue()) {
+				pai.setDireita(esquerdaDeCritico);
+			}else {
+				pai.setEsquerda(esquerdaDeCritico);
+			}
+			critico.setEsquerda(direitaDeEsquerdaDeCritico);
+			esquerdaDeCritico.setDireita(critico);
+			atualizarFatoresDeBalanceamentos(critico);
 		}
-		critico.setEsquerda(direitaDeEsquerdaDeCritico);
-		esquerdaDeCritico.setDireita(critico);
-		atualizarFatoresDeBalanceamentos(critico);
 	}
 	private void rotDuplaEsquerda(ArvoreBinaria critico){
 		ArvoreBinaria pai = buscarPai(critico.getRaiz());
-		rotSimplesDireita(critico.getEsquerda());
+		rotSimplesDireita(critico.getDireita());
 		ArvoreBinaria direitaDeCritico = critico.getDireita();
 		ArvoreBinaria esquerdaDeDireitaDeCritico = direitaDeCritico.getEsquerda();
-		if(pai.getRaiz().intValue() <= critico.getRaiz().intValue()) {
-			pai.setDireita(direitaDeCritico);
+		if(critico == getTree()) {
+			setTree(direitaDeCritico);
+			critico.setDireita(esquerdaDeDireitaDeCritico);
+			getTree().setEsquerda(critico);
+			getTree().atualizarFatorBalanceamento();
+			critico.atualizarFatorBalanceamento();
 		}else {
-			pai.setEsquerda(direitaDeCritico);
+			if(pai.getRaiz().intValue() <= critico.getRaiz().intValue()) {
+				pai.setDireita(direitaDeCritico);
+			}else {
+				pai.setEsquerda(direitaDeCritico);
+			}
+			critico.setEsquerda(esquerdaDeDireitaDeCritico);
+			direitaDeCritico.setDireita(critico);
+			atualizarFatoresDeBalanceamentos(critico);
 		}
-		critico.setEsquerda(esquerdaDeDireitaDeCritico);
-		direitaDeCritico.setDireita(critico);
-		atualizarFatoresDeBalanceamentos(critico);
 	}
 
 	public void insere(Integer val) {
@@ -94,22 +109,18 @@ public class AVL extends ArvoreBST{
 			if(arvorePaidoInserido.getFatorBalanceamento() >= 2 ) {
 				if(arvorePaidoInserido.getEsquerda().getFatorBalanceamento() >= 0) {
 					rotSimplesDireita(arvorePaidoInserido);
-					System.out.println("rotSimplesDireita");
 				}
 				else {
 					rotDuplaDireita(arvorePaidoInserido);
-					System.out.println("rotDuplaDireita");
 					
 				}
 				break;
 			}else if(arvorePaidoInserido.getFatorBalanceamento() <= -2) {
 				if(arvorePaidoInserido.getDireita().getFatorBalanceamento() <= 0) {
 					rotSimplesEsquerda(arvorePaidoInserido);
-					System.out.println("rotSimplesEsquerda");
 				}
 				else {
 					rotDuplaEsquerda(arvorePaidoInserido);
-					System.out.println("rotDuplaEsquerda");
 				}
 				break;
 			}
@@ -139,8 +150,16 @@ public class AVL extends ArvoreBST{
 					rotDuplaDireita(arvorePaidoRemovido);
 					break;
 				}
-			}else if(arvorePaidoRemovido.getFatorBalanceamento() <= -2 && arvorePaidoRemovido.getDireita().getFatorBalanceamento() <= 0) {
-				rotSimplesEsquerda(arvorePaidoRemovido);
+			}else if(arvorePaidoRemovido.getFatorBalanceamento() <= -2) {
+				if(arvorePaidoRemovido.getDireita().getFatorBalanceamento() <= 0) {
+					rotSimplesEsquerda(arvorePaidoRemovido);
+				}
+				else {
+					rotDuplaEsquerda(arvorePaidoRemovido);
+				}
+				break;
+			}
+			if(arvorePaidoRemovido.getRaiz() == val) {
 				break;
 			}
 			arvorePaidoRemovido = buscarPai(arvorePaidoRemovido.getRaiz());
