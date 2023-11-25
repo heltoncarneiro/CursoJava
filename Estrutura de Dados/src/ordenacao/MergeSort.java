@@ -20,16 +20,12 @@ public class MergeSort {
 
 	static void sort(int vetor[], int aux[], int low, int high) {
 
-		if (low >= high)
-
+		if (low >= high) {
 			return;
-
+		}
 		int mid = (low + high) / 2;
-
 		sort(vetor, aux, low, mid);
-
 		sort(vetor, aux, mid + 1, high);
-
 		merge(vetor, aux, low, mid, high);
 
 	}
@@ -38,21 +34,19 @@ public class MergeSort {
 
 		int i = low;
 		int j = mid + 1;
-		for (int k = low; k <= high; k++)
-			aux[k] = vetor[k];
 		for (int k = low; k <= high; k++) {
-			if (i > mid)
+			aux[k] = vetor[k];
+		}
+		for (int k = low; k <= high; k++) {
+			if (i > mid) {
 				vetor[k] = aux[j++];
-			else if (j > high)
+			}else if (j > high) {
 				vetor[k] = aux[i++];
-			else if (aux[j] < aux[i])
-
+			}else if (aux[j] < aux[i]) {
 				vetor[k] = aux[j++];
-
-			else
-
+			}else {
 				vetor[k] = aux[i++];
-
+			}
 		}
 
 	}
