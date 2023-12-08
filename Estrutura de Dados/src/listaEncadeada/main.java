@@ -12,7 +12,6 @@ public class main {
 		lista.Inserir("3");
 		lista.Inserir("4");
 		lista.Imprimir();
-		lista.deletar(0);
 		lista.Imprimir();
 		lista2.Imprimir();
 		

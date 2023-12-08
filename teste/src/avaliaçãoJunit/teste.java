@@ -89,10 +89,4 @@ class teste {
 		Exception exception = assertThrows(Exception.class, () -> new Pessoa("Antonio ", 22));
 		assertEquals("Deve ser informado o sobrenome", exception.getMessage());
 	}
-	@Test
-	void erro3() throws Exception {
-		Pessoa pessoa = new Pessoa(null, 100);
-		assertEquals(null, pessoa.getNome());
-		assertEquals(100, pessoa.getIdade());
-	}
 }

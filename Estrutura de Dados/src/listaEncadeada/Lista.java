@@ -29,17 +29,26 @@ public class Lista {
 			System.out.println("[]");;
 		}
 	}
-	public void deletar(int apagar) {
-		if(apagar <= 0) {
+	public void deletar(String info) {
+		if(ref.getInfo().equals(info)) {
 			ref = ref.getProx();
-		}else {
-			for(No i = ref; i != null; i = i.getProx()) {
-				apagar--;
-			if(apagar == 0) {
-				i.setProx(i.getProx().getProx());	
-				}
+			return ;
+		}
+		for(No i = ref; i!= null; i = i.getProx()) {
+			if(i.getProx() != null && i.getProx().getInfo().equals(info)) {
+				i.setProx(i.getProx().getProx());
+				return ;
 			}
 		}
-		
+		System.out.println(info+ " ,não foi deletado pois o elemento não existe");
 	}
+	public boolean procurar(String info) {
+		for(No i = ref; i!= null;  i = i.getProx()) {
+			if(i.getInfo().equals(info)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }
