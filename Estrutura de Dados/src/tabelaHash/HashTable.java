@@ -3,6 +3,9 @@ package tabelaHash;
 import listaEncadeada.Lista;
 
 public class HashTable {
+	//m0 = 1000/20
+	//m0 = 50 , numero primo mais proximo de 50 é 53
+	//m0 = 53
 	private int m;
 	private Lista[] hashtable;
 	public HashTable(int m) {
@@ -38,9 +41,11 @@ public class HashTable {
 		}
 		return val;
 	}
-	public void imprimirHashTable() {
+	public String imprimirHashTable() {
+		String saida = "";
 		for(Lista i : hashtable) {
-			i.Imprimir();
+			saida += i.Imprimir()+"\n";
 		}
+		return saida;
 	}
 }

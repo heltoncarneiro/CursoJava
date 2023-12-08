@@ -15,18 +15,19 @@ public class Lista {
 	public void Inserir(String info) {
 		ref = new No(info, ref);
 	}
-	public void Imprimir(){
+	public String Imprimir(){
 		if(ref != null) {
-			System.out.print("[");
+			String saida = "[";
 			for(No i = ref; i != null; i = i.getProx()) {
-				System.out.print(i.getInfo());
+				saida += i.getInfo();
 				if(i.getProx() != null) {
-					System.out.print(", ");
+					saida += ", ";
 				}
 			}
-			System.out.println("]");
+			saida += "]";
+			return saida;
 		}else {
-			System.out.println("[]");;
+			return "[]";
 		}
 	}
 	public void deletar(String info) {
